@@ -1,6 +1,3 @@
-#ifndef HEADER_H
-#define HEADER_H
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <pwd.h>
@@ -21,7 +18,6 @@
 #include <stdbool.h>
 #define DELIM " \t\n\a\r"
 #define ll long long int
-#define ld long double
 
 
 #define lp(var,start,end) for (ll var = start; var <end ; ++var)
@@ -35,14 +31,10 @@ struct group *grp;
 ll LS(char **args);
 struct tm *tm;
 char datestring[1050];
-char **bg_arr;
 #define semi ";"
-ll curr_pid,clockflag,processflag;
 char root[1024];
 ll pos;
-//mine
 void checkHostName(int hostname);
-//endmine
 char ** parseCommand(char *inp);
 char ** parseSemicolon();
 
@@ -57,18 +49,11 @@ char *actual_address2(char ** args,ll st);
 char* returnPath (char* cwd);
 ll ECHO(char **args);
 ll PWD(char **args);
-// char *actual_address(char ** args,ll st);
 
 ll PINFO(char **args) ;
 ssize_t bufsize;
 
 void ctrlZ(int signum);
 ll quit(char ** args);
-//mine
-//endmine
 void memory_error();
 int main(int a,char **b);
-
-
-
-#endif
