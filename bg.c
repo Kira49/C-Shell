@@ -50,14 +50,6 @@ ll BG(char **args)
     else
     {
 			bg_arr[pid]=args[0];
-    	if(!(strcmp(args[0],"vi")))
-			{
-				status[pid]=1;
-			}
-    	else
-			{
-				status[pid]=2;
-			}
     }
     return 1;
 }
