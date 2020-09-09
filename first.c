@@ -27,13 +27,12 @@ int main(int arg1, char **arg2)
 					{
 						if(WIFEXITED(st)>0)
 						{
-							status[p]=0;
-							fprintf(stderr, "Process %s with pid: %d exited normally\n",bg_arr[p],p);
+							fprintf(stderr, "Process %s with pid-- %d has exited normally\n",bg_arr[p],p);
 							bg_arr[p]=NULL;
 						}
 						else if(WIFSIGNALED(st))
 						{
-							fprintf(stderr, "Process %s with pid: %d exited abnormally\n",bg_arr[p],p);
+							fprintf(stderr, "Process %s with pid-- %d has exited abnormally\n",bg_arr[p],p);
 						}
 					}
           bufsize = 100005;
