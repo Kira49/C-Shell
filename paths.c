@@ -3,7 +3,7 @@ char* returnPath (char* cwd)
 {
     ll cwd_size = strlen(cwd);
     ll root_size = strlen(root);
-    if (root_size > cwd_size) 
+    if (root_size > cwd_size)
     {
         return cwd;
     }
@@ -11,7 +11,7 @@ char* returnPath (char* cwd)
     {
         return "~";
     }
-    if(root_size < cwd_size) 
+    if(root_size < cwd_size)
     {
         char *new = (char*)malloc(100);
         new[0] = '~', new[1] = '/';
@@ -21,8 +21,8 @@ char* returnPath (char* cwd)
         }
         return new;
     }
-} 
-char *actual_address2(char ** args,ll st)
+}
+char *real_address(char ** args,ll st)
 {
     char *newPath = (char *) malloc(1989*sizeof(char));
     if(!newPath)
@@ -42,4 +42,3 @@ char *actual_address2(char ** args,ll st)
     return newPath;
 
 }
-
