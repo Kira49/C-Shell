@@ -7,7 +7,6 @@ void checkHostName(int hostname)
         exit(1);
     }
 }
-
 ll quit(char ** args)
 {
     exit(EXIT_SUCCESS);
@@ -17,4 +16,18 @@ void memory_error()
 {
 	fprintf(stderr, "malloc error\n" );
         exit(EXIT_FAILURE);
+}
+void ctrlC(int signum)
+{
+    fprintf(stdout,"\nKeyboard interupt ^C, press enter to continue" );
+    fflush(stdout);
+		return;
+}
+void ctrlZ(int signum)
+{
+	return 	;
+}
+void ctrlZ2()
+{
+	return;
 }
