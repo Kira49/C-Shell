@@ -2,18 +2,16 @@
 
 ll checkCommand(char ** args)
 {
-	ll cnt=0;
-	ll i=0;
-    int notfound=0;
+	ll cnt=0, notfound=0;
 
 	if(args[0]==NULL)
 	{
 		return EXIT_FAILURE;
 	}
 	if(strcmp(args[0],"quit")==0)
-    {
+  {
     	return quit(args);
-    }
+  }
 	if(strcmp(args[0],"cd")==0)
 	{
 		return CD(args);
@@ -30,24 +28,12 @@ ll checkCommand(char ** args)
 	{
         return LS(args);
 	}
-    if(strcmp(args[0],"pinfo")==0)
-    {
-        return PINFO(args);
-    }
-    if(notfound==0)
-    {
-        printf("error: command %s not found\n", args[0]);
-        return;
-    }
-}
-
-void ctrlC(int signum)
-{
-    fprintf(stdout,"\nKeyboard interupt ^C, press enter to continue" );
-    fflush(stdout);
-		return;
-}
-void ctrlZ(int signum)
-{
-	return 	;
+  if(strcmp(args[0],"pinfo")==0)
+  {
+      return PINFO(args);
+  }
+  if(notfound==0)
+  {
+		return BG(args);
+  }
 }
