@@ -10,6 +10,7 @@ shell: \
 			pwd.o \
 			echo.o \
 			pinfo.o \
+			bg.o \
 
 	gcc -g -o shell $^
 
@@ -37,6 +38,9 @@ paths.o: header.h
 
 pinfo.o:  header.h
 	gcc -g -c  pinfo.c
+
+bg.o: header.h
+	gcc -g -c bg.c
 
 invoke.o: header.h
 	gcc -g -c invoke.c
