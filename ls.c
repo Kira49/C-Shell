@@ -82,7 +82,7 @@ ll LS(char **args)
             char *path=(char *) malloc(1234*sizeof(char));
 
 
-            path=actual_address2(args,i);
+            path=real_address(args,i);
             directory=opendir(path);
             if(directory!=NULL)
             {
