@@ -5,8 +5,8 @@ assignment:(
 This is a shell designed to run like a linux terminal written in C.
 Semicolon separated commands are taken as inputs, parsed, and executed.
 Certain commands like ls, pwd, cd, pinfo, echo are inbuilt, and the remaining are executed using execvp command. 
-Implementaion is majorly done using stat and dirent
-background prosses are also handled
+Implementaion is majorly done using stat and dirent.
+Background processes are also handled
 
 ## To run
 ```console
