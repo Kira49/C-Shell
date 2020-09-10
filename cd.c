@@ -1,36 +1,38 @@
 #include "header.h"
+// in this file we handle cd command anf related arguments
+
 ll CD(char **args)
 {
+    // if input is just cd
     if (args[1]==NULL)
     {
         chdir(root);
         return 1;        
-    } // just cd
+    } 
     
-    if (args[2]!=NULL) // more than 1 argument
+    // when input contains more than 1 argument (cd expects max 1)
+    if (args[2]!=NULL)
     {
         perror("Couldn't run cd command");
         return 1;        
     }
-        // print_err("cd: too many arguments!\nUsage: cd [path]");
+    // if path given as root
     if (strcmp(args[1], "~") == 0)
     {
         chdir(root);
         return 1;
     }
+    // if path given as current directory
     if (strcmp(args[1], ".") == 0)
     {
         return 1;
     }
-    if (args[1][0] == '~') // if relative to home address is given
+    // if address relarive to home is given
+    if (args[1][0] == '~') 
     {
-        // char *path = memalloc_str(1024 * 4);
         char *path=(char *) malloc(1234*sizeof(char));
-
-
+        
         sprintf(path, "%s/%s", root, args[1] + 2);
-        // if (debug_exec_cd)
-        //     printn_debug(path);
         if (chdir(path) < 0)
             perror("Path error");
         free(path);
