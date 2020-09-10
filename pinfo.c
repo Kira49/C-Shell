@@ -1,6 +1,6 @@
 #include"header.h"
 
-
+//pinfo 
 ll PINFO(char **args)
 {
       char *str = (char*)malloc(1234*sizeof(char));
