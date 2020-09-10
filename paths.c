@@ -1,4 +1,5 @@
 #include "header.h"
+// this file ontains funtions to set paths in diff places
 char* returnPath (char* cwd)
 {
     ll cwd_size = strlen(cwd);
