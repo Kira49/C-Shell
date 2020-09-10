@@ -1,6 +1,6 @@
 #ifndef HEADER_H
 #define HEADER_H
-
+// header file. ntohing much to look at, just declaing globals and funtions and including necessary libraries
 #include <stdio.h>
 #include <stdlib.h>
 #include <pwd.h>
