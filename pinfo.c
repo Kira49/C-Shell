@@ -8,7 +8,15 @@ ll PINFO(char **args)
       if(args[1]!=NULL)
       {
         if (strcmp(args[1],"&")==0)
+        {
+          if(args[2]!=NULL)
             pid = atoi(args[2]);
+          else
+          {
+            printf("invalid argument\n");
+            return 1;
+          }
+        }
         else
             pid = atoi(args[1]);
       }
