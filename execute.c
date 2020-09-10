@@ -2,7 +2,7 @@
 // in this file we check the parsed command and redirect it to be executed by the appropriate function
 ll checkCommand(char ** args)
 {
-	notfound=0;
+	ll notfound=0;
 	// if no command is found
 	if(args[0]==NULL)
 	{
