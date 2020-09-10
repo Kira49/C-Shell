@@ -1,6 +1,6 @@
 #include"header.h"
-
-
+// this file contains out inbuilt ls command
+// checking file permissons 
 char const * filePerm(__mode_t mode) {
     static char local_buff[16];
     int i = 0;
@@ -54,13 +54,15 @@ char const * filePerm(__mode_t mode) {
     }
     return local_buff;
 }
-
+// main
 ll LS(char **args)
 {
+    // initialising flags
     bool flag=true, isdir=0, isexe=0;
     ll flagcheck=0, both=0;
     DIR *directory;
     char buf[1989],dir_name[1989];
+    // setting flags after scanning arguments
     for(ll i=0;args[i]!=NULL;i++)
     {
         if(strcmp(args[i],"-a")==0)
@@ -77,6 +79,7 @@ ll LS(char **args)
         {
             flagcheck=3;
         }
+        // if path of directory given
         if(args[i][0]=='~')
         {
             char *path=(char *) malloc(1234*sizeof(char));
@@ -101,7 +104,7 @@ ll LS(char **args)
             fprintf(stderr, "ls: flag does  not exist, printing current directory contents\n");
         }
     }
-
+    // if path is true
     if(flag==true)
     {
         char cwd[1989];
@@ -119,7 +122,7 @@ ll LS(char **args)
         }
 
     }
-
+    // if both l and a flags are set
     if(flagcheck==3 || both>=2)
     {
         while(1)
@@ -133,7 +136,7 @@ ll LS(char **args)
             sprintf(buf, "%s/%s" , dir_name,dir->d_name);
             //we pass the file to read and read all its info using struct stat(here st)
             stat(buf,&st);
-            //hidden files
+        
 
             //file type and mode
             char *ck = filePerm(st.st_mode);
@@ -145,6 +148,7 @@ ll LS(char **args)
             {
               isexe = 1;
             }
+            
             printf("\033[0m%10.10s ", ck);
 
             printf("\033[0m%4lu",st.st_nlink );
@@ -183,9 +187,9 @@ ll LS(char **args)
 
         }
     }
+    // if only l flag is set
     else if(flagcheck==2)
     {
-        //ek ek krke dirent struct ko pointer deta rehta(read more later)
         while(1)
         {
             if((dir = readdir(directory))== NULL)
@@ -197,7 +201,6 @@ ll LS(char **args)
             sprintf(buf, "%s/%s" , dir_name,dir->d_name);
             //we pass the file to read and read all its info using struct stat(here st)
             stat(buf,&st);
-            //hidden files
 
             //file type and mode
             char *ck = filePerm(st.st_mode);
@@ -246,6 +249,7 @@ ll LS(char **args)
             printf("\033[0m");
         }
     }
+    // if only a flag is set
     else if(flagcheck==1)
     {
 
@@ -289,6 +293,7 @@ ll LS(char **args)
         }
         closedir(directory);
     }
+    // no flags 
     else
     {
         //if no more items to read returns null
