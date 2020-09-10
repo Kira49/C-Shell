@@ -1,5 +1,5 @@
 #include"header.h"
-
+// parses command further
 char ** parseCommand(char *inp)
 {
     char ** tokens = malloc(bufsize*sizeof(char *));
@@ -7,7 +7,8 @@ char ** parseCommand(char *inp)
     {
         memory_error();
     }
-    ll pos=0;
+    ll pos=0; 
+    // separated command by delimitors to separate command from argument
     char *temp =strtok(inp,DELIM);
     while(1)
     {
@@ -15,6 +16,7 @@ char ** parseCommand(char *inp)
         {
             break;
         }
+        // stored
         tokens[pos]=temp;
         pos++;
         temp =strtok(NULL,DELIM);
@@ -23,7 +25,7 @@ char ** parseCommand(char *inp)
     return tokens;
 
 }
-
+// invoked to take in the user input and separate the commands by semicolon
 char ** parseSemicolon()
 {
 
@@ -36,6 +38,7 @@ char ** parseSemicolon()
         memory_error();
     }
     ll pos = 0;
+    // separated by semicolon
     char *temp =strtok(inp_string,semi);
     while(1)
     {
@@ -43,6 +46,7 @@ char ** parseSemicolon()
         {
             break;
         }
+        // separated command stored
         tokens[pos]=temp;
         pos++;
         temp =strtok(NULL,semi);
