@@ -52,6 +52,7 @@ ll ECHO(char **args);
 ll PWD(char **args);
 ll BG(char **args);
 int gbnum;
+int mysetenv(char **args);
 ll PINFO(char **args) ;
 ssize_t bufsize;
 char hist[20][1000];
@@ -59,7 +60,12 @@ int hist_i;
 void ctrlZ(int signum);
 void ctrlZ2();
 ll quit(char ** args);
-
+int redirect(char **args, int num);
+void piping(char **args);
+int myunsetenv(char **args);
+ll myjobs(char **args);
+ll mykjobs(char **args);
+ll myfg(char ** args);
 void memory_error();
 int main(int a,char **b);
 
