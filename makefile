@@ -11,6 +11,9 @@ shell: \
 			echo.o \
 			pinfo.o \
 			bg.o \
+			piping.o \
+			redirect.o \
+			rest.o \
 
 	gcc -g -o shell $^
 
@@ -53,3 +56,12 @@ pwd.o:  header.h
 
 echo.o:  header.h
 	gcc -g -c echo.c
+
+piping.o:  header.h
+	gcc -g -c piping.c
+
+redirect.o:  header.h
+	gcc -g -c redirect.c
+
+rest.o:  header.h
+	gcc -g -c rest.c
