@@ -1,6 +1,6 @@
 #include"header.h"
 // this file contains out inbuilt ls command
-// checking file permissons 
+// checking file permissons
 char const * filePerm(__mode_t mode) {
     static char local_buff[16];
     int i = 0;
@@ -91,13 +91,18 @@ ll LS(char **args)
             {
                 strcpy(dir_name,path);
                 flag =false;
+                done[0]=':';
+                done[1]=')';
                 continue;
             }
             else
             {
                 fprintf(stderr,"ls: cannot access '%s': No such file or directory\n",path );
+                done[0]=':';
+                done[1]='(';
                 return 1;
             }
+
         }
         if(args[i][0]=='-' && flagcheck==0 )
         {
@@ -114,10 +119,14 @@ ll LS(char **args)
         if(directory!=NULL)
         {
             strcpy(dir_name,cwd);
+            done[0]=':';
+            done[1]=')';
         }
         else
         {
             fprintf(stderr,"ls: cannot access '%s': No such file or directory\n",cwd );
+            done[0]=':';
+            done[1]='(';
             return 1;
         }
 
@@ -136,7 +145,7 @@ ll LS(char **args)
             sprintf(buf, "%s/%s" , dir_name,dir->d_name);
             //we pass the file to read and read all its info using struct stat(here st)
             stat(buf,&st);
-        
+
 
             //file type and mode
             char *ck = filePerm(st.st_mode);
@@ -148,7 +157,7 @@ ll LS(char **args)
             {
               isexe = 1;
             }
-            
+
             printf("\033[0m%10.10s ", ck);
 
             printf("\033[0m%4lu",st.st_nlink );
@@ -293,7 +302,7 @@ ll LS(char **args)
         }
         closedir(directory);
     }
-    // no flags 
+    // no flags
     else
     {
         //if no more items to read returns null
@@ -337,4 +346,3 @@ ll LS(char **args)
         printf("\n");
     }
 }
-
