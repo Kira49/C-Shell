@@ -79,10 +79,14 @@ ll BG(char **args)
     if (pid < 0)
     {
         perror("ERROR:");
+        done[0]=':';
+        done[1]='(';
         return 1;
     }
     else if(pid==0)
     {
+        done[0]=':';
+        done[1]=')';
 	// vi command is an execption to our background processes since it causes issues. running vi & on terminal exits process
     	if(bg==true&&strcmp(args[0],"vi")==0)
 		{
@@ -92,7 +96,14 @@ ll BG(char **args)
       if ( execvp(args[0], args) < 0)
       {
           fprintf(stderr,"command: %s not found, press Enter to continue\n",args[0] );
+          done[0]=':';
+          done[1]='(';
           exit(EXIT_FAILURE);
+      }
+      else
+      {
+          done[0]=':';
+          done[1]=')';
       }
     	return 0;
     }
