@@ -8,19 +8,34 @@ ll BG(char **args)
     int st;
     ll i=0;
     ll pip=0,red=0;
-    while(args[i]!=NULL)
+    while(1)
     {
-        if(strcmp(args[i],">")==0||strcmp(args[i],"<")==0)
+        if(args[i]==NULL)
+        {
+            break;
+        }
+        if(strcmp(args[i],">")==0)
         {
             red=1;
+        }
+        else if(strcmp(args[i],"<")==0)
+        {
+            red=1;
+        }
+        if(red==1)
+        {
             break;
         }
         i++;
     }
 
     i=0;
-    while(args[i]!=NULL)
+    while(1)
     {
+        if(args[i]==NULL)
+        {
+            break;
+        }
         if(strcmp(args[i],"|")==0)
         {
             pip=1;
@@ -30,8 +45,12 @@ ll BG(char **args)
     }
     i=0;
     // checkinf if bg expected
-    while(args[i]!=NULL)
+    while(1)
     {
+        if(args[i]==NULL)
+        {
+            break;
+        }
         if(strcmp(args[i],"&")==0)
         {
 					if(args[i+1]==NULL)
@@ -85,11 +104,18 @@ ll BG(char **args)
     	signal(SIGTSTP,ctrlZ2);
       pid_t wpid = waitpid (pid, &st, WUNTRACED);
     }
-    else
+    if(bg==true)
     {
-        if(strcmp(args[0],"vi")==0)	status[pid]=2;
-    	else 	status[pid]=1;
-			bg_arr[pid]=args[0];
+        if(strcmp(args[0],"vi")==0)
+        {
+            status[pid]=2;
+            bg_arr[pid]=args[0];
+        }
+    	else
+        {
+            status[pid]=1;
+            bg_arr[pid]=args[0];
+        }
     }
     return 1;
 }
