@@ -61,8 +61,6 @@ ll PINFO(char **args)
           count++;
 
       }
-
-
       sprintf(str ,"/proc/%d/exe",pid);
       char *path = (char*)malloc(1234*sizeof(char));
 
