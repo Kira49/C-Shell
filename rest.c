@@ -4,12 +4,26 @@ int myunsetenv(char **args)
     if(args[1]==NULL)
     {
         perror("Inappropriate number of arguments\n");
+        done[0]=':';
+        done[1]='(';
         return 0;
+    }
+    else
+    {
+        done[0]=':';
+        done[1]=')';
     }
     if(unsetenv(args[1])<0)
     {
         printf("Setenv failed \n");
+        done[0]=':';
+        done[1]='(';
         return 1;
+    }
+    else
+    {
+        done[0]=':';
+        done[1]=')';
     }
     return 1;
 }
@@ -42,7 +56,14 @@ ll myjobs(char **args)
                 if(f==NULL)
                 {
                     perror("Can't open file \n");
+                    done[0]=':';
+                    done[1]='(';
                     return 0;
+                }
+                else
+                {
+                    done[0]=':';
+                    done[1]=')';
                 }
                 //first args
                 ll z=0;
@@ -79,7 +100,14 @@ ll mykjobs(char **args)
         if(args[1]==NULL || args[2]==NULL)
         {
             perror("Inappropriate number of arguments\n");
+            done[0]=':';
+            done[1]='(';
             return 0;
+        }
+        else
+        {
+            done[0]=':';
+            done[1]=')';
         }
         ll x1= atoi(args[1]);
 
@@ -115,18 +143,34 @@ int mysetenv(char **args)
     if(args[1]==NULL || args[3]!=NULL)
     {
         perror("Inappropriate number of arguments");
+        done[0]=':';
+        done[1]='(';
         return 0;
+    }
+    else
+    {
+        done[0]=':';
+        done[1]=')';
     }
 
     if(setenv(args[1],args[2],1)<0)
     {
         perror("Setenv failed \n");
+        done[0]=':';
+        done[1]='(';
+    }
+    else
+    {
+        done[0]=':';
+        done[1]=')';
     }
     return 1;
 }
 
 ll myfg(char ** args)
 {
+    done[0]=':';
+    done[1]=')';
     ll x=atoi(args[1]);
     ll j=1, i=0;
     while(i<100005)
@@ -155,6 +199,8 @@ ll myfg(char ** args)
 
 ll mybg(char ** args)
 {
+    done[0]=':';
+    done[1]=')';
     ll x=atoi(args[1]);
     ll j=1, i=0;
     while(i<100005)
@@ -178,6 +224,8 @@ ll mybg(char ** args)
 
 ll myoverkill(char ** args)
 {
+    done[0]=':';
+    done[1]=')';
     ll i=0;
     while(i<100005)
     {
