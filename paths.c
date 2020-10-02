@@ -30,6 +30,11 @@ char *real_address(char ** args,ll st)
     {
          memory_error();
     }
+    else
+    {
+        done[0]=':';
+        done[1]=')';
+    }
     strcpy(newPath,root);
     // newPath[0] = '~';
     ll len = strlen(args[st]);
@@ -41,4 +46,5 @@ char *real_address(char ** args,ll st)
     }
     newPath[iter]='\0';
     return newPath;
+
 }
