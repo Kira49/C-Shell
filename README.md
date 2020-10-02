@@ -21,3 +21,9 @@ $ quit
 
 ## ;-;
 Has been made colorful to mimic your terminal to make it feel more usable
+
+## bonus
+previous working directory has been implemented. Use as:
+```console
+$ cd -
+```

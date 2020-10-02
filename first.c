@@ -4,6 +4,7 @@ int main(int arg1, char **arg2)
 {
     // we initialise root
     getcwd(root, 1024);
+    getcwd(prev, 1024);
     ll state;
 		bg_arr=(char**)malloc(123456*sizeof(char *));
     while(1)
@@ -12,8 +13,8 @@ int main(int arg1, char **arg2)
         printPrompt();
         char **commands;
         char **argsi;
-	int st;
-	pid_t p;
+	    int st;
+	    pid_t p;
         signal(SIGTSTP,ctrlZ);
         signal(SIGINT,ctrlC);
         bufsize = 0;
@@ -32,6 +33,7 @@ int main(int arg1, char **arg2)
 			if(WIFEXITED(st)>0)
 			{
 				fprintf(stderr, "Process %s with pid-- %d has exited normally\n",bg_arr[p],p);
+                status[p]=0;
 				bg_arr[p]=NULL;
 			}
 			else if(WIFSIGNALED(st))

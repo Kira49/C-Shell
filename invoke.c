@@ -1,6 +1,6 @@
 #include "header.h"
 // in this file we initialise the user and system name, and print the command prompt
-void printPrompt () 
+void printPrompt ()
 {
     char* user = getenv("USER");
     char *curdir = (char *) malloc(1234*sizeof(char));

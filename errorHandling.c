@@ -1,5 +1,5 @@
 #include"header.h"
-// this file contains a few utility functions to handle errors and interrupts
+// this file contains a few utility functions to handle errors and signals
 // handles error while getting name of host
 void checkHostName(int hostname)
 {

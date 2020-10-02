@@ -7,7 +7,7 @@ char ** parseCommand(char *inp)
     {
         memory_error();
     }
-    ll pos=0; 
+    ll pos=0;
     // separated command by delimitors to separate command from argument
     char *temp =strtok(inp,DELIM);
     while(1)
@@ -31,6 +31,12 @@ char ** parseSemicolon()
 
     char *inp_string = NULL;
     getline(&inp_string,&bufsize,stdin);
+    if(strlen(inp_string)<=0)
+    {
+        printf("\n");
+        exit(0);
+
+    }
     char ** tokens = malloc(bufsize*sizeof(char*));
 
     if(!tokens)
