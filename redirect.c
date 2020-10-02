@@ -150,5 +150,4 @@ int redirect(char **args, int num)
 			exit(EXIT_FAILURE);
 		}
 	}
-
 }
