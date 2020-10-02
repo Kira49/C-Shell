@@ -48,7 +48,14 @@ void piping(char **args)
 			if(pipe(fd)<0)
 			{
 				perror("Piping error:");
+				done[0]=':';
+				done[1]='(';
 				return;
+			}
+			else
+			{
+				done[0]=':';
+				done[1]=')';
 			}
 			ll z=0;
 			char infile[1000];
@@ -103,6 +110,8 @@ void piping(char **args)
 			if(pipe(fd)<0)
 			{
 				perror("Piping error :");
+				done[0]=':';
+				done[1]='(';
 				return;
 			}
 			out=dup(1), dup2(fd[1],1);
@@ -114,14 +123,28 @@ void piping(char **args)
 		if(pid<0)
 		{
 			perror("Fork error : ");
+			done[0]=':';
+			done[1]='(';
 			return;
+		}
+		else
+		{
+			done[0]=':';
+			done[1]=')';
 		}
 		if(pid==0)
 		{
 			if(execvp(cur_com[0],cur_com)<0)
 			{
 				perror("Command not found");
+				done[0]=':';
+				done[1]='(';
 				exit(EXIT_FAILURE);
+			}
+			else
+			{
+				done[0]=':';
+				done[1]=')';
 			}
 		}
 		if(pid>0)
