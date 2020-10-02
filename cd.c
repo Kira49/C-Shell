@@ -21,7 +21,14 @@ ll CD(char **args)
     if (args[2]!=NULL)
     {
         perror("Couldn't run cd command");
+        done[0]=':';
+        done[1]='(';
         return 1;
+    }
+    else
+    {
+        done[0]=':';
+        done[1]=')';
     }
     if(strcmp(args[1], "-")==0)
     {
@@ -31,7 +38,14 @@ ll CD(char **args)
         if(chdir(prev)<0)
         {
             perror("Path error:");
+            done[0]=':';
+            done[1]='(';
             return 1;
+        }
+        else
+        {
+            done[0]=':';
+            done[1]=')';
         }
         for(int i=0; i<1024; i++)
         {
@@ -61,13 +75,29 @@ ll CD(char **args)
 
         sprintf(path, "%s/%s", root, args[1] + 2);
         if (chdir(path) < 0)
+        {
+            done[0]=':';
+            done[1]='(';
             perror("Path error");
+        }
+        else
+        {
+            done[0]=':';
+            done[1]=')';
+        }
         free(path);
         return 1;
     }
     if (chdir(args[1]) < 0)
     {
         perror("Path error");
+        done[0]=':';
+        done[1]='(';
         return 1;
+    }
+    else
+    {
+        done[0]=':';
+        done[1]=')';
     }
 }
