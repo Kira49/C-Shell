@@ -39,7 +39,14 @@ ll ECHO(char **args)
         if(getenv(a)==NULL)
         {
             perror("Not a env:");
+            done[0]=':';
+            done[1]='(';
             return 0;
+        }
+        else
+        {
+            done[0]=':';
+            done[1]=')';
         }
         printf("%s\n",getenv(a));
         return 1;
