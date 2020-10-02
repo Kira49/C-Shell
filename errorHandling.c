@@ -6,6 +6,8 @@ void checkHostName(int hostname)
     if (hostname == -1)
     {
         perror("gethostname");
+        done[0]=':';
+        done[1]='(';
         exit(1);
     }
 }
@@ -19,6 +21,8 @@ ll quit(char ** args)
 void memory_error()
 {
 	fprintf(stderr, "malloc error\n" );
+    done[0]=':';
+    done[1]='(';
         exit(EXIT_FAILURE);
 }
 // handles ctrl C keyboard interrupt
