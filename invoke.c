@@ -16,12 +16,18 @@ void printPrompt ()
     char *s = curdir;
     host_entry = gethostbyname(hostbuffer);
     // printing user in red
+    printf("\033[1;31m%s", done);
     printf("\033[1;31m%s@", user);
 
     if (host_entry == NULL)
     {
         perror("gethostbyname");
         exit(1);
+    }
+    else
+    {
+        done[0]=':';
+        done[1]=')';
     }
     // printing system name in red
     printf("\033[1;31m%s", hostbuffer);
