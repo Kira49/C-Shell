@@ -7,6 +7,11 @@ char ** parseCommand(char *inp)
     {
         memory_error();
     }
+    else
+    {
+        done[0]=':';
+        done[1]=')';
+    }
     ll pos=0;
     // separated command by delimitors to separate command from argument
     char *temp =strtok(inp,DELIM);
@@ -35,13 +40,17 @@ char ** parseSemicolon()
     {
         printf("\n");
         exit(0);
-
     }
     char ** tokens = malloc(bufsize*sizeof(char*));
 
     if(!tokens)
     {
         memory_error();
+    }
+    else
+    {
+        done[0]=':';
+        done[1]=')';
     }
     ll pos = 0;
     // separated by semicolon
