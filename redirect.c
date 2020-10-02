@@ -105,6 +105,8 @@ int redirect(char **args, int num)
 		if(stat(in,&chk)<0)
 		{
 			perror("File does not exist\n");
+			done[0]=':';
+			done[1]='(';
 		}
 		prein=dup(0);
    		fd0 = open(in,O_RDONLY, 0644);
@@ -124,6 +126,8 @@ int redirect(char **args, int num)
 		if(dup2(fd1,1)==-1)
 		{
 			perror("dup2 failed");
+			done[0]=':';
+			done[1]='(';
 			return 0;
 		}
 	}
@@ -133,6 +137,8 @@ int redirect(char **args, int num)
 	{
 		close(fd1);
 		perror("fork error : ");
+		done[0]=':';
+		done[1]='(';
 		return 0;
 	}
     else if(pid)
@@ -147,7 +153,15 @@ int redirect(char **args, int num)
 		if(execvp(args[0],args)<0)
 		{
 			perror("Command not found");
+			done[0]=':';
+			done[1]='(';
 			exit(EXIT_FAILURE);
 		}
+		else
+		{
+			done[0]=':';
+			done[1]=')';
+		}
 	}
+
 }
