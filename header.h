@@ -21,7 +21,7 @@
 #include <stdbool.h>
 #define DELIM " \t\n\a\r"
 #define ll long long int
-
+char done[2];
 struct dirent *dir;
 struct stat st;
 ll status[1000005];
