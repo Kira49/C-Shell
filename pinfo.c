@@ -1,6 +1,6 @@
 #include"header.h"
 
-//pinfo 
+//pinfo
 ll PINFO(char **args)
 {
       char *str = (char*)malloc(1234*sizeof(char));
@@ -10,10 +10,16 @@ ll PINFO(char **args)
         if (strcmp(args[1],"&")==0)
         {
           if(args[2]!=NULL)
-            pid = atoi(args[2]);
+          {
+              pid = atoi(args[2]);
+              done[0]=':';
+              done[1]=')';
+          }
           else
           {
             printf("invalid argument\n");
+            done[0]=':';
+            done[1]='(';
             return 1;
           }
         }
@@ -23,16 +29,30 @@ ll PINFO(char **args)
       if (!pid)
       {
           printf("invalid PID\n");
+          done[0]=':';
+          done[1]='(';
           return 1;
+      }
+      else
+      {
+          done[0]=':';
+          done[1]=')';
       }
       if(kill(pid,0))
       {
           perror("Invalid PID");
+          done[0]=':';
+          done[1]='(';
           return 1;
+      }
+      else
+      {
+          done[0]=':';
+          done[1]=')';
       }
 
       char bufff[100];
-      
+
       printf("pid -- %d\n", pid);
       sprintf(str ,"/proc/%d/status",pid);
 
@@ -40,7 +60,14 @@ ll PINFO(char **args)
       if (file == NULL)
       {
           perror("File Opening");
+          done[0]=':';
+          done[1]='(';
           return 1;
+      }
+      else
+      {
+          done[0]=':';
+          done[1]=')';
       }
 
       int count = 1;
@@ -61,6 +88,8 @@ ll PINFO(char **args)
           count++;
 
       }
+
+
       sprintf(str ,"/proc/%d/exe",pid);
       char *path = (char*)malloc(1234*sizeof(char));
 
