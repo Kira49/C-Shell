@@ -5,24 +5,42 @@ ll checkCommand(char ** args)
 	ll notfound=0;
 	ll pip=0,red=0;
 	ll i=0;
-    while(args[i]!=NULL)
+    while(1)
     {
-        if(strcmp(args[i],">")==0||strcmp(args[i],"<")==0)
+		if(args[i]==NULL)
+		{
+			break;
+		}
+        if(strcmp(args[i],">")==0)
         {
             red=1;
-            break;
         }
+		if(strcmp(args[i],"<")==0)
+		{
+			red=1;
+		}
+		if(red==1)
+		{
+			break;
+		}
         i++;
     }
 
     i=0;
-    while(args[i]!=NULL)
+    while(1)
     {
+		if(args[i]==NULL)
+		{
+			break;
+		}
         if(strcmp(args[i],"|")==0)
         {
             pip=1;
-            break;
         }
+		if(pip==1)
+		{
+			break;
+		}
         i++;
     }
     if(pip)
