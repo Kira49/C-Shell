@@ -23,7 +23,9 @@ $ quit
 Has been made colorful to mimic your terminal to make it feel more usable
 
 ## bonus
-previous working directory has been implemented. Use as:
+:( if prev command executed with an error, else :) before prompt.
+Previous working directory has been implemented. Use as:
 ```console
 $ cd -
-```
+``
+
