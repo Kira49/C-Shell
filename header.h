@@ -35,6 +35,7 @@ char **bg_arr;
 ll curr_pid;
 char root[1024];
 ll pos;
+char prev[1024];
 void checkHostName(int hostname);
 bool found;
 char ** parseCommand(char *inp);
