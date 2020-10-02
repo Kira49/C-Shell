@@ -3,200 +3,189 @@ int myunsetenv(char **args)
 {
     if(args[1]==NULL)
     {
-        perror("Inappropriate No of Args");
+        perror("Inappropriate number of arguments\n");
         return 0;
     }
-    if(unsetenv(args[1])==-1) printf("setenv failed \n");
+    if(unsetenv(args[1])<0)
+    {
+        printf("Setenv failed \n");
+        return 1;
+    }
     return 1;
 }
 ll myjobs(char **args)
 {
 	ll j=0;
-	char * s = "stopped";
-	char * r = "running";
 	int i=0;
+    char * str;
+    int p;
+    char r[300], s;
 	while(i<100005)
 	{
         if(status[i]==0)
         {
-            //chill
+            i++;
+            continue;
         }
         else
         {
-                // printf("[");
-                // printf("%lld",j++);
-                // printf("]");
-                if(bg_arr[i]!=NULL)
+                if(bg_arr[i]==NULL)
                 {
-                    printf("%d\n",i);
-                    char * var2=(malloc(sizeof(char)*1005));
-                    sprintf(var2,"/proc/%d/stat",i);
-                    //pinfo wala same
-                    FILE *f =fopen(var2,"r");
-                    if(f==NULL)
-                    {
-                        perror("unable to open file \n");
-                        return 0;
-                    }
-                    //first args
-                    ll z=0;
-                    int p;
-                    char r[300];
-                    char s;
-                    char * str;
-                    for(z=0;z<3;z++)
-                    {
-                        if(z==0)   fscanf(f,"%d",&p);
-                        if(z==1)   fscanf(f,"%s",r);
-                        if(z==2)   fscanf(f," %c",&s);
-                    }
-                    if(s=='R') status[i]=2;
-                    if(s=='S') status[i]=2;
-                    if(s!='S'&&s!='R') status[i]=1;
-                    if(status[i]==1)   str="stopped";
-                    else     str="running";
-                    j++;
-                    printf("[%lld]%s\t%s[%d]\n",j,str,bg_arr[i],i);
-            }
-			// if(status[i]!=1) printf("%s\t%s[%lld]\n",s,bg_arr[i],i);
-			// else	printf("%s\t%s[%lld]\n",r,bg_arr[i],i);
+                    i++;
+                    continue;
+                }
+                char * var2=(malloc(sizeof(char)*1007));
+                sprintf(var2,"/proc/%d/stat",i);
+                printf("%d\n",i);
+                //pinfo wala same
+                FILE *f =fopen(var2,"r");
+                if(f==NULL)
+                {
+                    perror("Can't open file \n");
+                    return 0;
+                }
+                //first args
+                ll z=0;
+                fscanf(f,"%d",&p);
+                fscanf(f,"%s",r);
+                fscanf(f," %c",&s);
+                if(s!='S'&&s!='R')
+                {
+                    status[i]=1;
+                }
+                else
+                {
+                    status[i]=2;
+                }
+                if(status[i]!=1)
+                {
+                    str="running";
+                }
+                else
+                {
+                    str="stopped";
+                }
+                j++;
+                printf("[%lld]%s\t", j,str);
+                printf("%s[%d]\n", bg_arr[i],i);
+                i++;
 		}
-		i++;
 	}
 	return 1;
 }
 ll mykjobs(char **args)
 {
-
-    ll f=0;
-    ll j=0,i=0,pid;
-    ll x1= atoi(args[1]);
-    while(i<1000005)
-    {
-        if(status[i]==0)
+        ll j=0,i=0,pid;
+        if(args[1]==NULL || args[2]==NULL)
         {
-            //chill
+            perror("Inappropriate number of arguments\n");
+            return 0;
         }
-        else
+        ll x1= atoi(args[1]);
+
+        while(i<1000005)
         {
-            j++; //running jobs ++
-            if(x1==j)
+            if(status[i]==0)
             {
-                pid = i,f=1;
-                break;
+                i++;
+                continue;
+            }
+            else
+            {
+                j++; //running jobs ++
+                if(x1==j)
+                {
+                    pid = i;
+                    break;
+                }
+                i++;
             }
         }
-        i++;
-    }
-    ll x=atoi(args[2]);
-    // printf("%lld%lld\n",x,pid );
-    kill(pid,x);
-    if(x==9) status[pid],bg_arr[pid]= NULL;
+        ll x=atoi(args[2]);
+        // printf("%lld%lld\n",x,pid );
+        kill(pid,x);
+        if(x==9) status[pid]=0;
 }
 int mysetenv(char **args)
 {
-    if(args[1]==NULL)
-    {
-        perror("Inappropriate No of Args");
-        return 0;
-    }
-    if(args[2]!=NULL&&args[3]!=NULL)
-    {
-        perror("Inappropriate No of Args");
-        return 0;
-    }
-    else if(args[2]==NULL)
+    if(args[2]==NULL)
     {
         args[2]="";
     }
+    if(args[1]==NULL || args[3]!=NULL)
+    {
+        perror("Inappropriate number of arguments");
+        return 0;
+    }
 
-    if(setenv(args[1],args[2],1)==-1)    printf("setenv failed \n");
-
+    if(setenv(args[1],args[2],1)<0)
+    {
+        perror("Setenv failed \n");
+    }
     return 1;
 }
 
 ll myfg(char ** args)
 {
-    ll j=1;
-    ll i=0;
     ll x=atoi(args[1]);
-
+    ll j=1, i=0;
     while(i<100005)
     {
         if(status[i]==0)
         {
-            //chill
+            i++;
+            continue;
         }
-        else
+        int s;
+        if(j==x)
         {
-            int s;
-            if(j==x)
+            kill(i,SIGCONT);
+            waitpid(i,&s,WUNTRACED);
+            if(WIFEXITED(s) || WIFSIGNALED(s))
             {
-                kill(i,SIGCONT);
-                waitpid(i,&s,WUNTRACED);
-                if(WIFEXITED(s))
-                {
-                    bg_arr[i]=NULL;
-                    status[i] =0;
-                }
-                if(WIFSIGNALED(s))
-                {
-                    bg_arr[i]=NULL;
-                    status[i] =0;
-                }
-                break;
+                status[i] =0;
+                bg_arr[i]=NULL;
             }
-            else
-            {
-                j++;
-            }
-
+            break;
         }
+        j++;
         i++;
     }
 }
 
 ll mybg(char ** args)
 {
-    ll j=1;
-    ll i=0;
     ll x=atoi(args[1]);
-
+    ll j=1, i=0;
     while(i<100005)
     {
         if(status[i]==0)
         {
-            //chill
+            i++;
+            continue;
         }
-        else
+        int s;
+        if(j==x)
         {
-            int s;
-            if(j==x)
-            {
-                kill(i,SIGCONT);
-                status[i]=2;
-                break;
-            }
-            else
-            {
-                j++;
-            }
-
+            kill(i,SIGCONT);
+            status[i]=2;
+            break;
         }
+        j++;
         i++;
     }
 }
 
 ll myoverkill(char ** args)
 {
-    ll i=0,j=0;
+    ll i=0;
     while(i<100005)
     {
-        if(status[i]==0)
+        if(status[i]!=0)
         {
-            //chill
+            status[i]=0;
+            kill(i,9);
         }
-        else j++,status[i]=0,bg_arr[i]=NULL,kill(i,9);
         i++;
     }
 }
