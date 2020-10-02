@@ -28,11 +28,7 @@ ll CD(char **args)
         char temp[1024];
         getcwd(temp, 1024);
         printf("%s\n", prev);
-        if(chdir(prev)<0)
-        {
-            perror("Path error");
-            return 1;
-        }
+        chdir(prev);
         for(int i=0; i<1024; i++)
         {
             prev[i] = temp[i];
