@@ -57,5 +57,5 @@ Has been made colorful to mimic your terminal to make it feel more usable
 Previous working directory has been implemented. Use as:
 ```console
 $ cd -
-``
+```
 
