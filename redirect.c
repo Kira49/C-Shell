@@ -9,7 +9,7 @@ int redirect(char **args, int num)
 	char *cur_com[1000];
     char in[1000],out[1000];
 	ll i=0;
-	while(1)
+    while(1)
     {
         if(args[i]==NULL)
         {
@@ -21,7 +21,7 @@ int redirect(char **args, int num)
         }
     }
 	i=0;
-	while(1)
+    while(1)
     {
         if(args[i]==NULL)
         {
@@ -33,7 +33,7 @@ int redirect(char **args, int num)
         }
     }
 	i=0;
-	while(1)
+    while(1)
     {
         if(args[i]==NULL)
         {
