@@ -1,5 +1,6 @@
 #include"header.h"
 // in this file we check the parsed command and redirect it to be executed by the appropriate function
+
 ll checkCommand(char ** args)
 {
 	ll notfound=0;
