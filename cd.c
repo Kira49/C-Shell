@@ -1,5 +1,5 @@
 #include "header.h"
-// in this file we handle cd command anf related arguments
+// in this file we handle cd command and related arguments
 
 ll CD(char **args)
 {
@@ -68,7 +68,7 @@ ll CD(char **args)
     {
         return 1;
     }
-    // if address relarive to home is given
+    // if address relative to home is given
     if (args[1][0] == '~')
     {
         char *path=(char *) malloc(1234*sizeof(char));
